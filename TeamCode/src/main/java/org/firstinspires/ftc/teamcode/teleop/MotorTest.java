@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class MotorTest extends OpMode {
     // Declare variables here
     private DcMotor testMotor;
+    final double RUN_POWER = 0.5;
 
     // init() Runs ONCE after the driver hits initialize
     @Override
@@ -17,24 +18,24 @@ public class MotorTest extends OpMode {
         telemetry.addData("Status", "Initializing");
 
         // Do all init stuff
-        // TODO: ADD INITS THAT YOU NEED
-        testMotor  = hardwareMap.get(DcMotor.class, "left_drive");
+        testMotor  = hardwareMap.get(DcMotor.class, "testMotor");
+
+        // Set direction
+        testMotor.setDirection(DcMotor.Direction.FORWARD);
 
         // Tell the driver the robot is ready
         telemetry.addData("Status", "Initialized");
     }
 
-    // init_loop() - Runs continuously until the driver hits play
-    @Override
-    public void init_loop() {
-    }
-
-    // Start() - Runs ONCE when the driver presses play
-    @Override
-    public void start() {}
-
     // loop() - Runs continuously while the OpMode is active, we typically write the majority of our code here.
     @Override
     public void loop() {
+        if (gamepad1.a) {
+            testMotor.setPower(RUN_POWER);
+            telemetry.addData("Test Motor State", "Running");
+        } else {
+            testMotor.setPower(0);
+            telemetry.addData("Test Motor State", "Stopped");
+        }
     }
 }
