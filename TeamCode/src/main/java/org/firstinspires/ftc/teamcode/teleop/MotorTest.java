@@ -18,7 +18,6 @@ public class MotorTest extends OpMode {
         telemetry.addData("Status", "Initializing");
 
         // Do all init stuff
-        // TODO: ADD INITS THAT YOU NEED
         testMotor  = hardwareMap.get(DcMotor.class, "testMotor");
 
         // Set direction
